@@ -2,44 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Rupesh Kumar Thakur | Portfolio</title>
+<title>Rupesh Kumar Thakur | Cybersecurity</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #0f172a;
-  color: white;
+  margin: 0;
+  font-family: "Courier New", monospace;
+  background: black;
+  color: #00ff00;
 }
 
 /* NAVBAR */
 nav {
+  background: #000;
+  padding: 15px;
+  border-bottom: 1px solid #00ff00;
   position: fixed;
   width: 100%;
   top: 0;
-  background: #020617;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 1000;
 }
 
 nav a {
-  color: white;
-  margin-left: 20px;
+  color: #00ff00;
+  margin-right: 20px;
   text-decoration: none;
-  transition: 0.3s;
 }
 
 nav a:hover {
-  color: #3b82f6;
+  text-shadow: 0 0 5px #00ff00;
 }
 
 /* HERO */
@@ -48,66 +39,53 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
-  text-align: center;
+  padding-left: 20px;
 }
 
-header h1 {
-  font-size: 50px;
+.typing {
+  border-right: 2px solid #00ff00;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(40, end) forwards, blink 0.7s infinite;
 }
 
-header p {
-  margin-top: 10px;
-  font-size: 20px;
+@keyframes typing {
+  to { width: 100%; }
 }
 
-/* SECTION */
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* SECTIONS */
 section {
   padding: 80px 20px;
-  max-width: 1000px;
-  margin: auto;
+  border-top: 1px solid #003300;
 }
 
 h2 {
-  margin-bottom: 20px;
-  border-bottom: 2px solid #3b82f6;
-  display: inline-block;
-}
-
-/* SKILLS */
-.skills span {
-  display: inline-block;
-  background: #1e293b;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 8px;
+  color: #00ff00;
 }
 
 /* PROJECTS */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
 .project {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 12px;
+  border: 1px solid #00ff00;
+  padding: 15px;
+  margin: 10px 0;
   transition: 0.3s;
 }
 
 .project:hover {
-  transform: translateY(-8px);
-  background: #334155;
+  background: #001100;
+  box-shadow: 0 0 10px #00ff00;
 }
 
 /* FOOTER */
 footer {
   text-align: center;
   padding: 20px;
-  background: #020617;
+  border-top: 1px solid #00ff00;
 }
 </style>
 </head>
@@ -115,50 +93,46 @@ footer {
 <body>
 
 <nav>
-  <h3>Rupesh</h3>
-  <div>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <header>
-  <h1>Rupesh Kumar Thakur</h1>
-  <p>Learning Cybersecurity</p>
+  <h1 class="typing">Rupesh Kumar</h1>
+  <p>Cybersecurity Student | Ethical Hacking Enthusiast</p>
 </header>
 
 <section id="about">
-  <h2>About Me</h2>
-  <p>I am a passionate developer building modern, responsive websites.</p>
+  <h2>> About Me</h2>
+  <p>
+    I am currently studying Cybersecurity at Chandigarh University.
+    I am building skills in ethical hacking, network security, and system protection.
+  </p>
 </section>
 
 <section id="skills">
-  <h2>Skills</h2>
-  <div class="skills">
-    <span>HTML</span>
-    <span>CSS</span>
-    <span>JavaScript</span>
-  </div>
+  <h2>> Skills</h2>
+  <p>
+    Linux | Networking | Wireshark | Burp Suite | Python | Ethical Hacking
+  </p>
 </section>
 
 <section id="projects">
-  <h2>Projects</h2>
-  <div class="projects">
-    <div class="project">Portfolio Website</div>
-    <div class="project">Landing Page</div>
-    <div class="project">UI Design</div>
-  </div>
+  <h2>> Projects</h2>
+  <div class="project">Password Strength Checker</div>
+  <div class="project">Port Scanner (Python)</div>
+  <div class="project">Basic Network Scan</div>
 </section>
 
 <section id="contact">
-  <h2>Contact</h2>
-  <p>Email: arc682813@email.com</p>
+  <h2>> Contact</h2>
+  <p>Email:arc682813@gmail.com</p>
 </section>
 
 <footer>
-  <p>© 2026 Rupesh KumarThakur<p>
+  <p>> System Active | © 2026 Rupesh Kumar Thakur</p>
 </footer>
 
 </body>
