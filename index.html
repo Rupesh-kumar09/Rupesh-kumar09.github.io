@@ -398,14 +398,14 @@
 
     /* ── COUNTDOWN ── */
     .countdown-section {
-      padding: 3rem 0;
+      padding: 2rem 0 0;
     }
     .countdown-card {
       background: var(--glass);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 2.5rem;
+      padding: 2rem 1.25rem 1.75rem;
       position: relative;
       overflow: hidden;
     }
@@ -417,37 +417,38 @@
     }
     .countdown-label {
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       letter-spacing: 0.2em;
       color: var(--primary);
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     .countdown-title {
       text-align: center;
-      font-size: 1.5rem; font-weight: 700;
-      margin-bottom: 0.3rem;
+      font-size: 1.25rem; font-weight: 700;
+      margin-bottom: 0.25rem;
     }
     .countdown-sub {
       text-align: center;
-      font-size: 0.8rem; color: var(--text-muted);
+      font-size: 0.72rem; color: var(--text-muted);
       font-family: var(--mono);
-      margin-bottom: 2rem;
+      margin-bottom: 1.4rem;
     }
     .countdown-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.5rem;
     }
     .countdown-unit {
       text-align: center;
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem 0.5rem 1rem;
+      border-radius: 10px;
+      padding: 1rem 0.2rem 0.75rem;
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s;
+      min-width: 0;
     }
     .countdown-unit:hover { border-color: var(--primary); }
     .countdown-unit::after {
@@ -460,33 +461,37 @@
     .countdown-unit:hover::after { opacity: 1; }
     .cu-num {
       font-family: var(--mono);
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.1rem, 5.5vw, 2rem);
       font-weight: 700;
       color: var(--primary);
       display: block;
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       transition: transform 0.1s;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
     }
     .cu-num.tick { animation: tickFlip 0.3s ease; }
     @keyframes tickFlip {
-      0% { transform: translateY(-8px); opacity: 0; }
+      0% { transform: translateY(-6px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
     .cu-label {
       font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
       color: var(--text-faint);
       text-transform: uppercase;
     }
     .countdown-progress-wrap {
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
     }
     .cp-row {
       display: flex; justify-content: space-between;
-      font-size: 0.75rem; color: var(--text-muted); font-family: var(--mono);
-      margin-bottom: 0.5rem;
+      font-size: 0.7rem; color: var(--text-muted); font-family: var(--mono);
+      margin-bottom: 0.4rem;
     }
     .cp-bar {
       height: 4px; background: var(--surface2);
@@ -1776,30 +1781,31 @@
     // ── SCROLL TOP ──
     document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // ── COUNTDOWN to June 1, 2029 ──
-    const target = new Date('2029-06-01T00:00:00');
-    const start  = new Date('2025-08-01T00:00:00');
-    const totalMs = target - start;
+    // ── COUNTDOWN: June 2025 → June 2029 ──
+    const gradEnd   = new Date('2029-06-01T00:00:00');
+    const gradStart = new Date('2025-06-01T00:00:00');
+    const gradTotal = gradEnd - gradStart;
+
+    const pad = (n, l = 2) => String(n).padStart(l, '0');
 
     function updateCountdown() {
-      const now = new Date();
-      const diff = target - now;
+      const now  = new Date();
+      const diff = gradEnd - now;
+
       if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '000';
+        document.getElementById('cd-days').textContent  = '000';
         document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
+        document.getElementById('cd-mins').textContent  = '00';
+        document.getElementById('cd-secs').textContent  = '00';
         document.getElementById('prog-fill').style.width = '100%';
-        document.getElementById('prog-pct').textContent = '100%';
+        document.getElementById('prog-pct').textContent  = '100%';
         return;
       }
+
       const days  = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const mins  = Math.floor((diff % 3600000)  / 60000);
       const secs  = Math.floor((diff % 60000)    / 1000);
-
-      const prevSecs = document.getElementById('cd-secs').textContent;
-      const pad = (n, l=2) => String(n).padStart(l, '0');
 
       document.getElementById('cd-days').textContent  = pad(days, 3);
       document.getElementById('cd-hours').textContent = pad(hours);
@@ -1813,10 +1819,10 @@
         secEl.classList.add('tick');
       }
 
-      const elapsed = now - start;
-      const pct = Math.min(100, Math.max(0, (elapsed / totalMs) * 100)).toFixed(1);
+      const elapsed = now - gradStart;
+      const pct = Math.min(100, Math.max(0, (elapsed / gradTotal) * 100)).toFixed(1);
       document.getElementById('prog-fill').style.width = pct + '%';
-      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('prog-pct').textContent  = pct + '%';
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
